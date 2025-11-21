@@ -1,0 +1,90 @@
+╔═══════════════════════════════════════════════════════════════╗
+║                                                               ║
+║        🎭 MECSEKI COELHO - PROJEKT FÁJLOK 🎭                 ║
+║                                                               ║
+╚═══════════════════════════════════════════════════════════════╝
+
+📁 mecseki-coelho/
+│
+├── 📚 DOKUMENTÁCIÓ (8 fájl)
+│   ├── START_HERE.md             ← ⭐ KEZDD EZZEL!
+│   ├── QUICKSTART.md             ← Gyors útmutató (5 perc)
+│   ├── README.md                 ← Teljes dokumentáció
+│   ├── PROJECT_SUMMARY.md        ← Projekt összefoglaló
+│   ├── CLAUDE_CODE_GUIDE.md      ← Claude Code használat
+│   ├── ARCHITECTURE.md           ← Technikai architektúra
+│   └── setup.sh                  ← Automatikus setup script
+│
+├── ⚙️ KONFIGURÁCIÓ (10 fájl)
+│   ├── package.json              ← NPM függőségek
+│   ├── tsconfig.json             ← TypeScript config
+│   ├── tsconfig.node.json        ← TypeScript Node config
+│   ├── vite.config.ts            ← Vite + PWA setup
+│   ├── tailwind.config.js        ← Tailwind pasztell színek
+│   ├── postcss.config.js         ← PostCSS config
+│   ├── netlify.toml              ← Netlify deployment
+│   ├── .env.example              ← Környezeti változók
+│   ├── .gitignore                ← Git ignore szabályok
+│   └── index.html                ← HTML sablon
+│
+├── 📂 src/ FORRÁSKÓD (8 fájl)
+│   │
+│   ├── 🎯 Főkomponensek
+│   │   ├── App.tsx               ← Fő alkalmazás (state, gombok)
+│   │   └── main.tsx              ← React belépési pont
+│   │
+│   ├── 🎨 Komponensek
+│   │   └── components/
+│   │       └── AnimationLayer.tsx  ← 120 animációs elem
+│   │
+│   ├── 🔧 Utils
+│   │   └── utils/
+│   │       ├── quoteGenerator.ts   ← 30+ közhely sablon
+│   │       └── animationGenerator.ts ← Animáció logika
+│   │
+│   ├── 📝 Típusok
+│   │   └── types/
+│   │       └── animation.ts        ← TypeScript interfaces
+│   │
+│   └── 🎨 Stílusok
+│       ├── index.css               ← Globális Tailwind CSS
+│       └── vite-env.d.ts           ← Vite típusdefiníciók
+│
+└── 🌐 public/
+    └── README.md                   ← PWA ikon útmutató
+
+═══════════════════════════════════════════════════════════════
+
+📊 ÖSSZESÍTÉS:
+
+✅ Összes fájl: 27 db
+✅ Forráskód fájlok: 8 db (TypeScript/React)
+✅ Konfig fájlok: 10 db
+✅ Dokumentáció: 8 db
+✅ PWA Ready: manifest + service worker
+✅ Deployment Ready: Netlify konfig
+✅ Claude Code Ready: teljes dokumentáció
+
+═══════════════════════════════════════════════════════════════
+
+🚀 GYORS START:
+
+1. cd mecseki-coelho
+2. ./setup.sh
+3. npm run dev
+4. Nyisd meg: http://localhost:5173
+
+═══════════════════════════════════════════════════════════════
+
+📖 DOKUMENTÁCIÓ PRIORITÁS:
+
+1️⃣  START_HERE.md          ← Kezdd ezzel!
+2️⃣  QUICKSTART.md          ← 5 perces setup
+3️⃣  README.md              ← Teljes útmutató
+4️⃣  CLAUDE_CODE_GUIDE.md   ← Claude Code parancsok
+5️⃣  ARCHITECTURE.md        ← Technikai részletek
+
+═══════════════════════════════════════════════════════════════
+
+🎭 Jó puffogtatást! ✨
+
