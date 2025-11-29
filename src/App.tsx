@@ -1,24 +1,27 @@
 import { useState, useRef, useCallback } from 'react';
 import html2canvas from 'html2canvas';
 import { generateCoelhoQuote } from './utils/quoteGenerator';
-import { generateAnimationElements } from './utils/animationGenerator';
+import { generateAnimationElements, getRandomTheme } from './utils/animationGenerator';
 import { AnimationLayer } from './components/AnimationLayer';
-import type { AnimationElement } from './types/animation';
+import type { AnimationElement, AnimationTheme } from './types/animation';
 
 function App() {
   const [quote, setQuote] = useState<string>('');
   const [animationEnabled, setAnimationEnabled] = useState<boolean>(false);
   const [animationElements, setAnimationElements] = useState<AnimationElement[]>([]);
+  const [, setCurrentTheme] = useState<AnimationTheme>('eredeti');
   const contentRef = useRef<HTMLDivElement>(null);
 
-  // Új közhely generálása
+  // Új közhely generálása - minden pufogtatáskor új animáció téma!
   const handleGenerateQuote = () => {
     const newQuote = generateCoelhoQuote();
     setQuote(newQuote);
 
-    // Ha az animáció be van kapcsolva, generáljunk új elemeket
+    // Ha az animáció be van kapcsolva, generáljunk új elemeket ÚJ TÉMÁVAL
     if (animationEnabled) {
-      const elements = generateAnimationElements(120);
+      const newTheme = getRandomTheme();
+      setCurrentTheme(newTheme);
+      const elements = generateAnimationElements(120, newTheme);
       setAnimationElements(elements);
     }
   };
@@ -26,8 +29,10 @@ function App() {
   // Animáció ki/be kapcsolása
   const handleToggleAnimation = () => {
     if (!animationEnabled) {
-      // Generáljunk 100+ animációs elemet
-      const elements = generateAnimationElements(120);
+      // Generáljunk 100+ animációs elemet random témával
+      const newTheme = getRandomTheme();
+      setCurrentTheme(newTheme);
+      const elements = generateAnimationElements(120, newTheme);
       setAnimationElements(elements);
     } else {
       setAnimationElements([]);
