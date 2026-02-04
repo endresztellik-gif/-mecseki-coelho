@@ -1,21 +1,23 @@
 import { useState, useRef, useCallback } from 'react';
 import html2canvas from 'html2canvas';
-import { generateCoelhoQuote } from './utils/quoteGenerator';
+import { generateCoelhoQuote, generatePhilosopherAttribution } from './utils/quoteGenerator';
 import { generateAnimationElements, getRandomTheme } from './utils/animationGenerator';
 import { AnimationLayer } from './components/AnimationLayer';
 import type { AnimationElement, AnimationTheme } from './types/animation';
 
 function App() {
   const [quote, setQuote] = useState<string>('');
+  const [attribution, setAttribution] = useState<string>('');
   const [animationEnabled, setAnimationEnabled] = useState<boolean>(false);
   const [animationElements, setAnimationElements] = useState<AnimationElement[]>([]);
   const [, setCurrentTheme] = useState<AnimationTheme>('eredeti');
   const contentRef = useRef<HTMLDivElement>(null);
 
-  // Új közhely generálása - minden pufogtatáskor új animáció téma!
+  // Új közhely generálása - minden puffogtatáskor új animáció téma!
   const handleGenerateQuote = () => {
     const newQuote = generateCoelhoQuote();
     setQuote(newQuote);
+    setAttribution(generatePhilosopherAttribution());
 
     // Ha az animáció be van kapcsolva, generáljunk új elemeket ÚJ TÉMÁVAL
     if (animationEnabled) {
@@ -108,9 +110,14 @@ function App() {
           {/* Közhely mondat - könyv tartalma */}
           {quote && (
             <div className="min-h-[300px] sm:min-h-[250px] flex items-center justify-center mb-32 sm:mb-40 py-8">
-              <p className="text-lg sm:text-xl font-elegant text-gray-700 leading-relaxed text-center px-4">
-                "{quote}"
-              </p>
+              <div className="w-full px-4">
+                <p className="text-lg sm:text-xl font-elegant text-gray-700 leading-relaxed text-center">
+                  "{quote}"
+                </p>
+                <p className="text-sm text-gray-400 italic text-right mt-3">
+                  — {attribution}
+                </p>
+              </div>
             </div>
           )}
 
@@ -120,7 +127,7 @@ function App() {
               onClick={handleGenerateQuote}
               className="w-full sm:w-auto px-8 py-4 bg-pastel-purple hover:bg-pastel-pink transition-colors rounded-full font-elegant text-lg text-gray-800 shadow-lg hover:shadow-xl transform hover:scale-105 duration-200"
             >
-              🎭 Pufogtatás
+              🎭 Puffogtatás
             </button>
 
             <button

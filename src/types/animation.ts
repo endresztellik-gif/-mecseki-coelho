@@ -17,14 +17,14 @@ export type AnimationType =
 export type AnimationBehavior = 'float' | 'grow' | 'explode' | 'special';
 
 // Animáció témák
-export type AnimationTheme = 'eredeti' | 'irodalmi' | 'termeszet' | 'unnepi' | 'vicces';
+export type AnimationTheme = 'eredeti' | 'irodalmi' | 'természet' | 'ünnepi' | 'vicces';
 
 // Téma -> animáció típusok mapping
 export const animationThemes: Record<AnimationTheme, AnimationType[]> = {
   eredeti: ['heart', 'star', 'pacman', 'sparkle', 'bubble', 'flower'],
   irodalmi: ['quill', 'book', 'coffee', 'sparkle'],
-  termeszet: ['butterfly', 'leaf', 'sakura', 'bird', 'rose', 'potFlower', 'flower'],
-  unnepi: ['snowflake', 'confetti', 'diamond', 'moon', 'firework', 'star'],
+  természet: ['butterfly', 'leaf', 'sakura', 'bird', 'rose', 'potFlower', 'flower'],
+  ünnepi: ['snowflake', 'confetti', 'diamond', 'moon', 'firework', 'star'],
   vicces: ['banana', 'pacman', 'bubble']
 };
 

@@ -79,7 +79,7 @@ const randomFrom = <T,>(arr: T[]): T => {
 
 // Random téma választás
 export const getRandomTheme = (): AnimationTheme => {
-  const themes: AnimationTheme[] = ['eredeti', 'irodalmi', 'termeszet', 'unnepi', 'vicces'];
+  const themes: AnimationTheme[] = ['eredeti', 'irodalmi', 'természet', 'ünnepi', 'vicces'];
   return randomFrom(themes);
 };
 

@@ -23,20 +23,29 @@ const subjectsData = [
   { nom: 'Az öröm', acc: 'az örömet', gen: 'az örömnek' },
   { nom: 'A bánat', acc: 'a bánatot', gen: 'a bánatnak' },
   { nom: 'A vágy', acc: 'a vágyat', gen: 'a vágynak' },
+  // Filozofiai alanyok
+  { nom: 'A tudat', acc: 'a tudatot', gen: 'a tudatnak' },
+  { nom: 'A valóság', acc: 'a valóságot', gen: 'a valóságnak' },
+  { nom: 'A lényeg', acc: 'a lényeget', gen: 'a lényegnek' },
+  { nom: 'Az illúzió', acc: 'az illúziót', gen: 'az illúziónak' },
+  { nom: 'A végtelenség', acc: 'a végtelenséget', gen: 'a végtelenségnek' },
 ];
 
 const subjects = subjectsData.map(s => s.nom);
 
-// Összehasonlítások (olyan, mint)
+// Összehasonlítások – csak azok, ami a sablonban valóban működnek
 const comparisons = [
-  'olyan, mint', 'akár', 'hasonlít', 'emlékeztet arra, mint',
-  'olyan, mintha', 'hasonló', 'olyan, akár'
+  'olyan, mint',
+  'akár',
+  'pontosan úgy van, mint',
+  'valóban olyan, mint',
+  'olyan, akár',
 ];
 
-// Igék (megfelelő ragozással)
+// Igék – tárgyas ragozás (bennünket = határozott tárgy → definit alak)
 const actions = [
-  'vezet', 'mutat', 'tanít', 'sugall', 'teremt', 'formál',
-  'átölel', 'megtanít', 'megmutat', 'elvezet', 'rávilágít'
+  'vezeti', 'formálja', 'átöleli', 'elvezeti', 'alakítja',
+  'teremti meg', 'megrendíti', 'lelkesíti', 'megragadja', 'felébreszti',
 ];
 
 const metaphors = [
@@ -47,9 +56,15 @@ const metaphors = [
   'egy láng, ami örökké ég a sötétségben',
   'egy tükör, amelyben mindenki önmagát látja',
   'egy kert, ahol minden virág egy-egy emlék',
-  'egy ösvény, amit a csillagok világítanak meg',
-  'egy dal, amit csak a lelkek hallanak',
-  'egy híd, ami összeköti a múltat és a jövőt'
+  'egy ösvény, amit a csillagok megvilágítják',
+  'egy dal, amit csak a lelkek hallják',
+  'egy híd, ami összeköti a múltat és a jövőt',
+  // Filozofiai metafórák
+  'egy végtelen labirintus, amelyben minden fal egy-egy illúzió',
+  'egy csendes mélység, amelyet csak a tudat tud felfogni',
+  'egy tükör, amelyben a valóság és az illúzió összeolvad',
+  'egy hullám, amely mindig visszatér a tengerbe',
+  'egy ajtó, amely a lelket a végtelenbe nyitja',
 ];
 
 const connectors = [
@@ -60,14 +75,19 @@ const connectors = [
 const deepThoughts = [
   'a sors már megírta a történetet',
   'minden lépés egy új kezdet felé vezet',
-  'a szerelem fénye mindent beragyog',
+  'a szerelem fénye mindent beragyogja',
   'az igazság mindig utat talál magának',
   'a lélek útja végtelenül gyönyörű',
   'minden pillanat egy ajándék az univerzumtól',
   'a szív titkai csak a csendben nyílnak meg',
-  'az élet csodái mindenütt körülvesznek minket',
+  'az élet csodái mindenütt körülveszik minket',
   'a remény soha nem hal meg igazán',
-  'minden végzet egy új kezdet lehetősége'
+  'minden végzet egy új kezdet lehetősége',
+  // Filozofiai mélyedelmek
+  'a tudat az egyetlen valóság, amit igazán megismerhetünk',
+  'minden dolog összefügg a végtelenben',
+  'az illúzió és a valóság közötti határvonal elmosódik',
+  'a lelkünk mélyén rejlik a mindenség kulcsa',
 ];
 
 const poeticEndings = [
@@ -78,9 +98,32 @@ const poeticEndings = [
   'mert ez az egyetlen út a boldogsághoz',
   'és ezt érezni kell, nem csak érteni',
   'ahogy minden igaz keresőnek tudnia kell',
-  'mint egy költemény, amit a szél suttog',
+  'mint egy költemény, amit a szél suttogja',
   'és ebben találjuk meg önmagunkat',
   'ahogy a világ teremtése óta mindig is volt'
+];
+
+// Filozofok – a sablonokban használt nevek
+const philosophers = [
+  'Herakleitosz', 'Szókratész', 'Platon', 'Aristotelész',
+  'Descartes', 'Kant', 'Nietzsche', 'Heidegger',
+  'Buddha', 'Konfúcius', 'Spinoza', 'Kierkegaard',
+];
+
+// Filozofos attribúciók – humoros szerzőség a mondat alá
+const philosopherAttributions = [
+  'egy bölcs a kávézóban',
+  'Paulo Coelho kisebb öccse',
+  'Herakleitosz, de rosszabbul',
+  'Nietzsche, ha kevesebb bort ivott volna',
+  'egy szombat estei Aristotelész',
+  'Descartes, de kevesebb kétkedéssel',
+  'Buddha, ha Twitter-en lett volna',
+  'Konfúcius egy távoli unokatestvére',
+  'egy valóban fontos ember, messze innen',
+  'Platon, szóban',
+  'egy ismeretlen Kant-tanítvány',
+  'Spinoza, kedvezőbb kedvben',
 ];
 
 export const generateCoelhoQuote = (): string => {
@@ -100,7 +143,7 @@ export const generateCoelhoQuote = (): string => {
     // Igés szerkezetek
     () => `${random(subjects)} ${random(actions)} bennünket, mert ${random(deepThoughts)}, ${random(poeticEndings)}.`,
 
-    () => `${random(subjects)} útja mindig a ${random(['szív', 'lélek', 'szerelem', 'remény', 'igazság'])} mélyén kezdődik, és ${random(deepThoughts)}.`,
+    () => `${random(subjects)} útja mindig a ${random(['szív', 'lélek', 'szerelem', 'remény', 'vágy', 'tudat'])} mélyén kezdődik, és ${random(deepThoughts)}.`,
 
     () => {
       const subj = random(subjectsData);
@@ -118,11 +161,30 @@ export const generateCoelhoQuote = (): string => {
       const subj = random(subjectsData);
       return `Csak akkor értjük meg igazán ${subj.acc}, amikor felismerjük, hogy ${random(comparisons)} ${random(metaphors)}, és ${random(deepThoughts)}.`;
     },
+
+    // Filozofikus sablonok
+    () => {
+      const subj = random(subjectsData);
+      return `Azt a bölcsséget, amit ${random(philosophers)} is tanította, mi is felismerjük: ${subj.nom.toLowerCase()} ${random(comparisons)} ${random(metaphors)}, mert ${random(deepThoughts)}.`;
+    },
+
+    () => {
+      const subj = random(subjectsData);
+      return `De miért keressük mi ${subj.acc}, ha tudjuk, hogy ${random(deepThoughts)}? Mert ${random(subjects)} ${random(comparisons)} ${random(metaphors)}.`;
+    },
+
+    () => {
+      const subj = random(subjectsData);
+      return `Amikor a tudat felébredik, az első igazság, amit megtanulja, az, hogy ${subj.nom.toLowerCase()} ${random(comparisons)} ${random(metaphors)}, és ezért ${random(deepThoughts)}.`;
+    },
   ];
 
-  // Válasszunk ki egy random template-et és generáljuk a mondatot
   const template = random(templates);
   return template();
+};
+
+export const generatePhilosopherAttribution = (): string => {
+  return random(philosopherAttributions);
 };
 
 // Helper függvény random elem kiválasztásához
