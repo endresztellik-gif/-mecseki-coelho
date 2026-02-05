@@ -1,34 +1,34 @@
 // Coelho-stílusú közhely mondatok generálása
 // Minimum 12 szó, gagyi, patetikus, túlzóan filozofikus
 
-// Alany esetek és ragozott alakjaik
+// Alany esetek és ragozott alakjaik (nom = nevező, acc = tárgyeset, dat = dativusz)
 const subjectsData = [
-  { nom: 'Az élet', acc: 'az életet', gen: 'az életnek' },
-  { nom: 'A szív', acc: 'a szívet', gen: 'a szívnek' },
-  { nom: 'A lélek', acc: 'a lelket', gen: 'a léleknek' },
-  { nom: 'A sors', acc: 'a sorsot', gen: 'a sorsnak' },
-  { nom: 'Az út', acc: 'az utat', gen: 'az útnak' },
-  { nom: 'A szerelem', acc: 'a szerelmet', gen: 'a szerelemnek' },
-  { nom: 'Az álom', acc: 'az álmot', gen: 'az álomnak' },
-  { nom: 'A remény', acc: 'a reményt', gen: 'a reménynek' },
-  { nom: 'Az idő', acc: 'az időt', gen: 'az időnek' },
-  { nom: 'A béke', acc: 'a békét', gen: 'a békének' },
-  { nom: 'Az igazság', acc: 'az igazságot', gen: 'az igazságnak' },
-  { nom: 'A fény', acc: 'a fényt', gen: 'a fénynek' },
-  { nom: 'A pillanat', acc: 'a pillanatot', gen: 'a pillanatnak' },
-  { nom: 'A szenvedély', acc: 'a szenvedélyt', gen: 'a szenvedélynek' },
-  { nom: 'A végzet', acc: 'a végzetet', gen: 'a végzetnek' },
-  { nom: 'A csend', acc: 'a csendet', gen: 'a csendnek' },
-  { nom: 'A szabadság', acc: 'a szabadságot', gen: 'a szabadságnak' },
-  { nom: 'Az öröm', acc: 'az örömet', gen: 'az örömnek' },
-  { nom: 'A bánat', acc: 'a bánatot', gen: 'a bánatnak' },
-  { nom: 'A vágy', acc: 'a vágyat', gen: 'a vágynak' },
+  { nom: 'Az élet', acc: 'az életet', dat: 'az életnek' },
+  { nom: 'A szív', acc: 'a szívet', dat: 'a szívnek' },
+  { nom: 'A lélek', acc: 'a lelket', dat: 'a léleknek' },
+  { nom: 'A sors', acc: 'a sorsot', dat: 'a sorsnak' },
+  { nom: 'Az út', acc: 'az utat', dat: 'az útnak' },
+  { nom: 'A szerelem', acc: 'a szerelmet', dat: 'a szerelemnek' },
+  { nom: 'Az álom', acc: 'az álmot', dat: 'az álomnak' },
+  { nom: 'A remény', acc: 'a reményt', dat: 'a reménynek' },
+  { nom: 'Az idő', acc: 'az időt', dat: 'az időnek' },
+  { nom: 'A béke', acc: 'a békét', dat: 'a békének' },
+  { nom: 'Az igazság', acc: 'az igazságot', dat: 'az igazságnak' },
+  { nom: 'A fény', acc: 'a fényt', dat: 'a fénynek' },
+  { nom: 'A pillanat', acc: 'a pillanatot', dat: 'a pillanatnak' },
+  { nom: 'A szenvedély', acc: 'a szenvedélyt', dat: 'a szenvedélynek' },
+  { nom: 'A végzet', acc: 'a végzetet', dat: 'a végzetnek' },
+  { nom: 'A csend', acc: 'a csendet', dat: 'a csendnek' },
+  { nom: 'A szabadság', acc: 'a szabadságot', dat: 'a szabadságnak' },
+  { nom: 'Az öröm', acc: 'az örömet', dat: 'az örömnek' },
+  { nom: 'A bánat', acc: 'a bánatot', dat: 'a bánatnak' },
+  { nom: 'A vágy', acc: 'a vágyat', dat: 'a vágynak' },
   // Filozofiai alanyok
-  { nom: 'A tudat', acc: 'a tudatot', gen: 'a tudatnak' },
-  { nom: 'A valóság', acc: 'a valóságot', gen: 'a valóságnak' },
-  { nom: 'A lényeg', acc: 'a lényeget', gen: 'a lényegnek' },
-  { nom: 'Az illúzió', acc: 'az illúziót', gen: 'az illúziónak' },
-  { nom: 'A végtelenség', acc: 'a végtelenséget', gen: 'a végtelenségnek' },
+  { nom: 'A tudat', acc: 'a tudatot', dat: 'a tudatnak' },
+  { nom: 'A valóság', acc: 'a valóságot', dat: 'a valóságnak' },
+  { nom: 'A lényeg', acc: 'a lényeget', dat: 'a lényegnek' },
+  { nom: 'Az illúzió', acc: 'az illúziót', dat: 'az illúziónak' },
+  { nom: 'A végtelenség', acc: 'a végtelenséget', dat: 'a végtelenségnek' },
 ];
 
 const subjects = subjectsData.map(s => s.nom);
@@ -39,7 +39,15 @@ const comparisons = [
   'akár',
   'pontosan úgy van, mint',
   'valóban olyan, mint',
-  'olyan, akár',
+  'éppen olyan, mint',
+];
+
+// Összehasonlítások "hogy" után (szubjektus nélkül) – "akár" itt nem működik
+const comparisonsSub = [
+  'olyan, mint',
+  'pontosan úgy van, mint',
+  'valóban olyan, mint',
+  'éppen olyan, mint',
 ];
 
 // Igék – tárgyas ragozás (bennünket = határozott tárgy → definit alak)
@@ -67,9 +75,9 @@ const metaphors = [
   'egy ajtó, amely a lelket a végtelenbe nyitja',
 ];
 
+// Csak azok, ami metafóra (vonatkozó mondattal) után is grammatikusan működnek
 const connectors = [
-  'mert', 'mivel', 'ahol', 'amelyben', 'ahonnan', 'amikor',
-  'és ezért', 'így', 'de', 'azonban', 'miközben', 'hogy'
+  'mert', 'mivel', 'amikor', 'és ezért', 'így', 'de', 'azonban', 'miközben',
 ];
 
 const deepThoughts = [
@@ -87,7 +95,7 @@ const deepThoughts = [
   'a tudat az egyetlen valóság, amit igazán megismerhetünk',
   'minden dolog összefügg a végtelenben',
   'az illúzió és a valóság közötti határvonal elmosódik',
-  'a lelkünk mélyén rejlik a mindenség kulcsa',
+  'a lélek mélyén rejlik a mindenség kulcsa',
 ];
 
 const poeticEndings = [
@@ -98,7 +106,7 @@ const poeticEndings = [
   'mert ez az egyetlen út a boldogsághoz',
   'és ezt érezni kell, nem csak érteni',
   'ahogy minden igaz keresőnek tudnia kell',
-  'mint egy költemény, amit a szél suttogja',
+  'mint egy költemény, amit a szél súg',
   'és ebben találjuk meg önmagunkat',
   'ahogy a világ teremtése óta mindig is volt'
 ];
@@ -150,7 +158,10 @@ export const generateCoelhoQuote = (): string => {
       return `A bölcsek azt mondják, hogy ${subj.nom.toLowerCase()} ${random(comparisons)} ${random(metaphors)}, és ${random(deepThoughts)}.`;
     },
 
-    () => `${random(subjects)} legmélyebb titka abban rejlik, hogy ${random(comparisons)} ${random(metaphors)}, ezért ${random(deepThoughts)}.`,
+    () => {
+      const subj = random(subjectsData);
+      return `${subj.nom} legmélyebb titka abban rejlik, hogy az ${random(comparisonsSub)} ${random(metaphors)}, ezért ${random(deepThoughts)}.`;
+    },
 
     () => {
       const subj = random(subjectsData);
@@ -159,7 +170,7 @@ export const generateCoelhoQuote = (): string => {
 
     () => {
       const subj = random(subjectsData);
-      return `Csak akkor értjük meg igazán ${subj.acc}, amikor felismerjük, hogy ${random(comparisons)} ${random(metaphors)}, és ${random(deepThoughts)}.`;
+      return `Csak akkor értjük meg igazán ${subj.acc}, amikor felismerjük, hogy az ${random(comparisonsSub)} ${random(metaphors)}, és ${random(deepThoughts)}.`;
     },
 
     // Filozofikus sablonok

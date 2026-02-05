@@ -17,7 +17,7 @@ function App() {
   const handleGenerateQuote = () => {
     const newQuote = generateCoelhoQuote();
     setQuote(newQuote);
-    setAttribution(generatePhilosopherAttribution());
+    setAttribution(Math.random() < 0.4 ? generatePhilosopherAttribution() : '');
 
     // Ha az animáció be van kapcsolva, generáljunk új elemeket ÚJ TÉMÁVAL
     if (animationEnabled) {
@@ -114,9 +114,11 @@ function App() {
                 <p className="text-lg sm:text-xl font-elegant text-gray-700 leading-relaxed text-center">
                   "{quote}"
                 </p>
-                <p className="text-sm text-gray-400 italic text-right mt-3">
-                  — {attribution}
-                </p>
+                {attribution && (
+                  <p className="text-sm text-gray-400 italic text-right mt-3">
+                    — {attribution}
+                  </p>
+                )}
               </div>
             </div>
           )}
